@@ -1,6 +1,7 @@
-// RegisterForm.jsx
 import React, { useState } from 'react';
 import './Registerform.css'; // Reuse the same CSS for styling
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const statesAndDistricts = {
   "Andhra Pradesh": ["Anantapur", "Chittoor", "East Godavari", "Guntur", "Krishna"],
@@ -21,6 +22,7 @@ const RegisterForm = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,22 +44,32 @@ const RegisterForm = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      // Submit form data
-      console.log('Form submitted', formData);
+      try {
+        const { confirmPassword, ...dataToSend } = formData; // Exclude confirmPassword
+        const response = await axios.post("http://127.0.0.1:5000/register", dataToSend);
+        console.log(response.data.message); // Success message
+        alert("Registration successful!");
+
+        // Redirect to the login page
+        navigate("/");
+      } catch (error) {
+        console.error("Error registering user:", error);
+        alert(error.response?.data?.error || "Registration failed!");
+      }
     }
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper2">
       <form onSubmit={handleSubmit}>
         <h1>Register</h1>
-        <div className="input-box">
+        <div className="ip-box">
           <label>Name</label>
           <input
             type="text"
@@ -69,7 +81,7 @@ const RegisterForm = () => {
           />
           {errors.name && <span>{errors.name}</span>}
         </div>
-        <div className="input-box">
+        <div className="ip-box">
           <label>Phone Number</label>
           <input
             type="text"
@@ -81,7 +93,7 @@ const RegisterForm = () => {
           />
           {errors.phoneNumber && <span>{errors.phoneNumber}</span>}
         </div>
-        <div className="input-box">
+        <div className="ip-box">
           <label>Email</label>
           <input
             type="email"
@@ -119,7 +131,7 @@ const RegisterForm = () => {
           </label>
           {errors.farmer && <span>{errors.farmer}</span>}
         </div>
-        <div className="input-box ">
+        <div className="ip-box ">
           <label>State</label>
           <select
             name="state"
@@ -134,7 +146,7 @@ const RegisterForm = () => {
           </select>
           {errors.state && <span>{errors.state}</span>}
         </div>
-        <div className="input-box">
+        <div className="ip-box">
           <label>District</label>
           <select
             name="district"
@@ -149,7 +161,7 @@ const RegisterForm = () => {
           </select>
           {errors.district && <span>{errors.district}</span>}
         </div>
-        <div className="input-box">
+        <div className="ip-box">
           <label>Password</label>
           <input
             type="password"
@@ -161,7 +173,7 @@ const RegisterForm = () => {
           />
           {errors.password && <span>{errors.password}</span>}
         </div>
-        <div className="input-box">
+        <div className="ip-box">
           <label>Confirm Password</label>
           <input
             type="password"

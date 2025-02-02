@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper2{
     width: 420px;
     background: transparent;
     border: 2px solid rgba(255,255,255,.2);
@@ -9,13 +9,13 @@
     padding: 30px 40px;
 }
 
-.wrapper h1{
+.wrapper2 h1{
     font-size: 36px;
     text-align: center;
 }
 
 
-.wrapper .input-box{
+.wrapper2 .ip-box{
     position: relative;
     width: 100%;
     height: 50px;
@@ -23,7 +23,7 @@
     margin-bottom: 40px;
 }
 
-.wrapper .farmer{
+.wrapper2 .farmer{
     display: flex;
     gap: 20px;
     width: 100%;
@@ -33,7 +33,7 @@
 }
 
 
-.input-box input{
+.ip-box input{
     width: 100%;
     height: 100%;
     background: transparent;
@@ -43,10 +43,10 @@
     border-radius: 40px;  
     font-size: 16px;
     color: #000000;
-    /* padding: 20px 45px 20px 20px; */
+     padding: 20px 45px 20px 20px; 
 }
 
-.input-box select{
+.ip-box select{
     width: 100%;
     height: 100%;
     background: transparent;
@@ -59,11 +59,12 @@
     padding-left: 20px;
 }
 
-.input-box input::placeholder{
+.ip-box input::placeholder{
     color: #000000;
+
 }
 
-.input-box label {
+.ip-box label {
     display: block;
     margin-left: 20px;
     font-size: 16px;
@@ -71,7 +72,7 @@
   }
 
 
-.wrapper button{
+.wrapper2 button{
     width: 100%;
     height: 45px;
     border: none;
@@ -85,11 +86,11 @@
     font-weight: 700;
 }
 
-.wrapper button:hover{
+.wrapper2 button:hover{
     background: #f2f2f2;
 }
 
-.wrapper .register-link{
+.wrapper2 .register-link{
     font-size: 14.5px;
     text-align: center;
     margin: 20px 0 15px;

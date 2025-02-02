@@ -47,20 +47,19 @@ def login():
     try:
         data = request.json
         # Validate required fields
-        required_fields = ["identifier", "password"]
+        required_fields = ["username", "password"]
         for field in required_fields:
             if field not in data or not data[field]:
                 return jsonify({"error": f"{field} is required"}), 400
 
-        # Check if identifier is an email or phone number
-        identifier = data["identifier"]
-        user = users_collection.find_one({"email": identifier}) or users_collection.find_one({"phoneNumber": identifier})
+        # Find user by username
+        user = users_collection.find_one({"username": data["username"]})
         if not user:
-            return jsonify({"error": "Invalid identifier or password"}), 400
+            return jsonify({"error": "Invalid username or password"}), 400
 
         # Check password
         if not bcrypt.checkpw(data["password"].encode('utf-8'), user["password"].encode('utf-8')):
-            return jsonify({"error": "Invalid identifier or password"}), 400
+            return jsonify({"error": "Invalid username or password"}), 400
 
         return jsonify({"message": "Login successful"}), 200
 
