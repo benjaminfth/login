@@ -41,7 +41,7 @@ def register():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Route to handle user login
+# Route to handle user loginnn
 @app.route("/login", methods=["POST"])
 def login():
     try:
